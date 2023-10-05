@@ -6,23 +6,23 @@ GREEN='\033[0;32m'
 RESET='\033[0m'
 
 if printf -- '%s' "$(cat ./CHANGELOG.md)" | egrep -q -- "$VERSION"; then
-     echo "${GREEN}Verified CHANGELOG.md contains note for current version...${RESET}"
+     echo -e -e "${GREEN}Verified CHANGELOG.md contains note for current version...${RESET}"
 else
-    echo "${RED}CHANGELOG.md is missing change notes for current version! Exiting...${RESET}"
+    echo -e "${RED}CHANGELOG.md is missing change notes for current version! Exiting...${RESET}"
     exit 1;
 fi
 
 if printf -- '%s' "$(cat ./CHANGELOG_de-DE.md)" | egrep -q -- "$VERSION"; then
-     echo "${GREEN}Verified CHANGELOG_de-DE.md contains note for current version...${RESET}"
+     echo -e "${GREEN}Verified CHANGELOG_de-DE.md contains note for current version...${RESET}"
 else
-    echo "${RED}CHANGELOG.md is missing change notes for current version! Exiting...${RESET}"
+    echo -e "${RED}CHANGELOG.md is missing change notes for current version! Exiting...${RESET}"
     exit 1;
 fi
 
 if printf -- '%s' "$(sh ./bin/check-todos.sh)" | egrep -q -- "OK"; then
-    echo "${GREEN}No TODOs found...${RESET}"
+    echo -e "${GREEN}No TODOs found...${RESET}"
 else
-    echo "${RED}Complete TODO's before building.${RESET}"
+    echo -e "${RED}Complete TODO's before building.${RESET}"
     sh ./bin/check-todos.sh
     exit 1;
 fi
@@ -32,8 +32,7 @@ sh ./bin/quality-analyze.sh || exit 1
 
 PLUGIN_NAME=${PWD##*/}
 
-echo "${GREEN}Building $PLUGIN_NAME distribution $VERSION...${RESET}"
-
+echo -e "${GREEN}Building $PLUGIN_NAME distribution $VERSION...${RESET}"
 
 mkdir ./$PLUGIN_NAME
 
@@ -49,4 +48,4 @@ rm -rf ./$PLUGIN_NAME
 
 mv ./$PLUGIN_NAME-$VERSION.zip ./dist/
 
-echo "${GREEN}Done! New distribution is available at ./dist/$PLUGIN_NAME-$VERSION.zip${RESET}"
+echo -e "${GREEN}Done! New distribution is available at ./dist/$PLUGIN_NAME-$VERSION.zip${RESET}"
