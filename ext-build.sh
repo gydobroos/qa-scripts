@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 RESET='\033[0m'
 
 if printf -- '%s' "$(cat ./CHANGELOG.md)" | egrep -q -- "$VERSION"; then
-     echo -e -e "${GREEN}Verified CHANGELOG.md contains note for current version...${RESET}"
+     echo -e "${GREEN}Verified CHANGELOG.md contains note for current version...${RESET}"
 else
     echo -e "${RED}CHANGELOG.md is missing change notes for current version! Exiting...${RESET}"
     exit 1;
